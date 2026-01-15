@@ -1,5 +1,11 @@
 # Release Notes
 
+## January 2026
+
+### Bug fixes
+
+- Enforce boot mode for OL7
+
 ## August 2025
 
 ### New Features
