@@ -2,6 +2,10 @@
 
 ## January 2026
 
+### New Features
+
+- Minor update for OL9U7/OL10U1
+
 ### Bug fixes
 
 - Enforce boot mode for OL7
