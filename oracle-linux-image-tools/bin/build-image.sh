@@ -192,7 +192,7 @@ load_env() {
   [[ "${SERIAL_CONSOLE_RUNTIME,,}" =~ ^((yes)|(no))$ ]] || common::error "SERIAL_CONSOLE_RUNTIME must be yes or no"
   readonly SERIAL_CONSOLE_RUNTIME
 
-
+  [[ "${ORACLE_RELEASE}" -eq 7 && "${BOOT_MODE,,}" !=  "bios" ]] && common::error "OL7 only supports bios BOOT_MODE"
   [[ "${BOOT_MODE,,}" =~ ^((bios)|(uefi)|(hybrid))$ ]] || common::error "BOOT_MODE must be bios, uefi or hybrid"
   readonly BOOT_MODE
 
@@ -211,6 +211,7 @@ load_env() {
   ( cd "${WORKSPACE}" && [[ -d $(dirname "${CACHE_DIR}") ]] ) ||
     common::error "parent directory of CACHE_DIR must exists"
   CACHE_PATH="$(cd "${WORKSPACE}" && cd "$(dirname "${CACHE_DIR}")" && pwd -P)/$(basename "${CACHE_DIR}")"
+  # shellcheck disable=SC2034
   readonly CACHE_PATH
 
   # Source image scripts
