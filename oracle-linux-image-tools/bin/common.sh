@@ -94,6 +94,25 @@ common::convert_to_qcow2() {
 }
 
 #######################################
+# Convert disk image (QCOW2) to compressed RAW format
+# Globals:
+#   VM_NAME, WORKSPACE
+# Arguments:
+#   1: output file name (including .raw extension, excluding the gz suffix)
+#   -: implicit use of `${WORKSPACE}/${VM_NAME}/${VM_NAME}.qcow2`
+# Returns:
+#   - $output file generated
+#   - ${VM_NAME}.qcow2 file removed unless --keep is passed as 2nd argument
+#######################################
+common::convert_to_raw() {
+  local output=${1:?- ***error*** \'output\' not set}
+  local input="${WORKSPACE}/${VM_NAME}/${VM_NAME}.qcow2"
+  qemu-img convert -p -f qcow2 -O raw -S 4k "${input}" "${output}"
+  gzip "${output}"
+  [[ $2 != "--keep" ]] && rm "${input}" || :
+}
+
+#######################################
 # Convert disk image (QCOW2) to VMDK format
 # Globals:
 #   VM_NAME, WORKSPACE
@@ -163,13 +182,13 @@ common::fix_vmdk_header() {
 #   -: implicit use of `${WORKSPACE}/${VM_NAME}/${VM_NAME}.qcow2`
 # Returns:
 #   - $output file generated
-#   - ${VM_NAME}.qcow2 file removed
+#   - ${VM_NAME}.qcow2 file removed unless --keep is passed as 2nd argument
 #######################################
 common::convert_to_vhd() {
   local output=${1:?- ***error*** \'output\' not set}
   local input="${WORKSPACE}/${VM_NAME}/${VM_NAME}.qcow2"
   qemu-img convert -f qcow2 -O vpc -o subformat=dynamic "${input}" "${output}"
-  rm "${input}"
+  [[ $2 != "--keep" ]] && rm "${input}" || :
 }
 
 #######################################

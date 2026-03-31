@@ -1,5 +1,11 @@
 # Release Notes
 
+## March 2026
+
+### New Features
+
+- Initial AWS support
+
 ## January 2026
 
 ### New Features
