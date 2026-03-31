@@ -13,9 +13,13 @@ They currently support:
   - Oracle Linux 7 update 9 -- Slim (x86_64 only; deprecated)
   - Oracle Linux 8 update 10 -- Slim (x86_64 and aarch64)
   - Oracle Linux 9 update 5 -- Slim (x86_64 and aarch64)
+  - Oracle Linux 10 update 1 -- Slim (x86_64 and aarch64)
 - Clouds:
+  - Amazon Web Services (AWS) (x86_64)  
+    Target packages: Amazon ena driver / cloud-init  
+    Image format: VMDK
   - Microsoft Azure cloud (x86_64)  
-    Target packages: WALinuxAgent  
+    Target packages: WALinuxAgent
     Image format: VHD
   - Oracle Cloud Infrastructure (OCI) (x86_64 and aarch64)  
     Target packages: qemu-guest-agent / cloud-init  
